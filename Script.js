@@ -1,35 +1,111 @@
+const messages = document.getElementById("messages");
+const input = document.getElementById("input");
+
+
+// Send text command
 function sendMessage(){
 
-let input=document.getElementById("input");
-let messages=document.getElementById("messages");
+    let text = input.value;
 
-let text=input.value;
+    if(text.trim() === "") return;
 
-if(text=="") return;
+    addMessage("You: " + text);
 
+    respond(text);
 
-messages.innerHTML += 
-"<p>You: "+text+"</p>";
-
-
-let reply="I am still learning, sir.";
-
-
-if(text.toLowerCase().includes("hello")){
-    reply="Good day. How may I assist you?";
+    input.value="";
 }
 
 
-messages.innerHTML += 
-"<p>JARVIS: "+reply+"</p>";
+// Add chat message
+function addMessage(text){
 
-
-input.value="";
+    messages.innerHTML += "<p>" + text + "</p>";
+    messages.scrollTop = messages.scrollHeight;
 
 }
 
+
+// JARVIS brain (basic version)
+function respond(command){
+
+    command = command.toLowerCase();
+
+    let reply="I am still upgrading my systems, sir.";
+
+    if(command.includes("hello")){
+        reply="Hello. All systems are online.";
+    }
+
+    else if(command.includes("time")){
+        reply="The current time is " + new Date().toLocaleTimeString();
+    }
+
+    else if(command.includes("date")){
+        reply="Today's date is " + new Date().toLocaleDateString();
+    }
+
+    else if(command.includes("who are you")){
+        reply="I am JARVIS, your personal artificial intelligence assistant.";
+    }
+
+
+    addMessage("JARVIS: " + reply);
+
+    speak(reply);
+
+}
+
+
+// Text to speech
+function speak(text){
+
+    let speech = new SpeechSynthesisUtterance(text);
+
+    speech.rate = 1;
+    speech.pitch = 0.8;
+
+    window.speechSynthesis.speak(speech);
+
+}
+
+
+
+// Voice recognition
 
 function listen(){
 
-alert("Voice system initializing...");
+    const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+
+    if(!SpeechRecognition){
+        alert("Voice recognition is not supported in this browser.");
+        return;
+    }
+
+
+    let recognition = new SpeechRecognition();
+
+    recognition.start();
+
+
+    recognition.onstart=function(){
+        addMessage("JARVIS: Listening...");
+    };
+
+
+    recognition.onresult=function(event){
+
+        let voiceText =
+        event.results[0][0].transcript;
+
+
+        input.value = voiceText;
+
+        sendMessage();
+
+    };
+
 }
