@@ -1,0 +1,145 @@
+body {
+    margin:0;
+    height:100vh;
+    overflow:hidden;
+    background:
+    radial-gradient(circle,#071a38,#000);
+    color:#00ffff;
+    font-family:Arial, sans-serif;
+}
+
+
+.stars {
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-image:
+    radial-gradient(#fff 1px,transparent 1px);
+    background-size:50px 50px;
+    animation:moveStars 20s linear infinite;
+}
+
+
+@keyframes moveStars {
+    from {background-position:0 0;}
+    to {background-position:500px 500px;}
+}
+
+
+.hud {
+    position:relative;
+    text-align:center;
+    padding-top:50px;
+}
+
+
+.title {
+    font-size:50px;
+    letter-spacing:10px;
+    text-shadow:
+    0 0 20px cyan;
+}
+
+
+.title span {
+    display:block;
+    font-size:15px;
+}
+
+
+.reactor {
+    margin:50px auto;
+    width:250px;
+    height:250px;
+    position:relative;
+}
+
+
+.core {
+    position:absolute;
+    width:80px;
+    height:80px;
+    background:white;
+    border-radius:50%;
+    top:85px;
+    left:85px;
+    box-shadow:
+    0 0 50px cyan;
+    animation:pulse 2s infinite;
+}
+
+
+.ring {
+    position:absolute;
+    border:3px solid cyan;
+    border-radius:50%;
+}
+
+
+.ring1 {
+    width:200px;
+    height:200px;
+    top:25px;
+    left:25px;
+    animation:spin 5s linear infinite;
+}
+
+
+.ring2 {
+    width:240px;
+    height:240px;
+    top:5px;
+    left:5px;
+    animation:spin 8s linear reverse infinite;
+}
+
+
+@keyframes spin {
+    from {transform:rotate(0);}
+    to {transform:rotate(360deg);}
+}
+
+
+@keyframes pulse {
+    50% {
+        transform:scale(1.2);
+    }
+}
+
+
+.chat {
+    margin:auto;
+    width:400px;
+}
+
+
+#messages {
+    height:150px;
+    border:1px solid cyan;
+    padding:10px;
+    overflow:auto;
+}
+
+
+input {
+    width:70%;
+    padding:10px;
+    background:black;
+    color:white;
+    border:1px solid cyan;
+}
+
+
+button {
+    padding:10px;
+    background:black;
+    color:cyan;
+    border:1px solid cyan;
+}
+
+
+.voice {
+    margin-top:30px;
+    width:250px;
+    border-radius:20px;
+}
